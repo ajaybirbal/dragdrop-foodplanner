@@ -4,6 +4,8 @@ import MenuDndContainer from "./components/MenuDndContainer";
 import initialdata from './initialdata'
 import { useDispatch, useSelector } from "react-redux";
 import { setUserplanStateData } from "./reducers/userplanReduxFunctions";
+import AddBrunchButton from "./components/AddBrunchButton";
+import globals from "./styles/global.module.css"
 
 function App() {
 
@@ -13,11 +15,14 @@ function App() {
 
   const [foodList, setFoodList] = useState([]);
 
+  //First time loading of the items
   useEffect(() => {
-    //First time loading of the items
-    if (foodList.length === 0) {
-      dispatch(setUserplanStateData(initialdata))
-    }
+    dispatch(setUserplanStateData(initialdata))
+    setFoodList(state)
+  }, []);
+
+  //Subsequent state handling
+  useEffect(() => {
     setFoodList(state)
   }, [state]);
 
@@ -26,6 +31,9 @@ function App() {
     // Wraps whole draggable app
     <div className={styles.contentWrapper}>
       <h1>Food Planner</h1>
+      <div>
+        <AddBrunchButton className={globals.primaryButton}/>
+      </div>
       <MenuDndContainer />
     </div>
   );

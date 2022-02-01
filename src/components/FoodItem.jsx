@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './../styles/fooditem.module.css'
 import { Draggable } from 'react-beautiful-dnd'
+import globals from './../styles/global.module.css'
 
 const FoodItem = ({ item, index }) => {
 
@@ -29,8 +30,8 @@ const FoodItem = ({ item, index }) => {
                             {item.calories} Calories
                         </span>
                         <div>
-                            <button onClick={editItem}>Edit</button>
-                            <button onClick={deleteItem}>Delete</button>
+                            <button onClick={editItem} className={globals.secondaryButton}>Edit</button>
+                            <button onClick={deleteItem} className={globals.tertiaryButton}>Delete</button>
                         </div>
                     </div>
                 </div>

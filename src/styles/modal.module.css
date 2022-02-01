@@ -1,0 +1,31 @@
+.container {
+    background-color: rgb(194, 229, 194);
+    padding: 20px 20px;
+    border: 2px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    min-width: 400px;
+    max-width: 500px;
+}
+
+.container h3 {
+    border-bottom: 1px solid black;
+    font-size: 17px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+.closeButton {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: transparent;
+    border: 0;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bolder;
+}

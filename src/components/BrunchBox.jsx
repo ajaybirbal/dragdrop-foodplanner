@@ -4,6 +4,7 @@ import styles from './../styles/brunchbox.module.css'
 import FoodItem from './FoodItem'
 import { useDispatch } from "react-redux";
 import { deleteBrunchStateData } from '../reducers/userplanReduxFunctions';
+import globals from './../styles/global.module.css'
 
 /*******
  * Displays individual brunch boxes. Responsible for handling them
@@ -31,8 +32,8 @@ const BrunchBox = ({ brunch }) => {
             <div className={styles.titleArea}>
                 <h2>{brunch.brunch}</h2>
                 <div>
-                    <button onClick={addFood}>Add Food</button>
-                    <button onClick={deleteBrunch}>Delete {brunch.brunch}</button>
+                    <button onClick={addFood} className={globals.primaryButton}>Add Food</button>
+                    <button onClick={deleteBrunch} className={globals.secondaryButton} >Delete {brunch.brunch}</button>
                 </div>
             </div>
 
