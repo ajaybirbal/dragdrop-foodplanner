@@ -1,21 +1,28 @@
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd'
 import styles from './../styles/brunchbox.module.css'
-import FoodItem from './FoodItem';
+import FoodItem from './FoodItem'
+import { useDispatch } from "react-redux";
+import { deleteBrunchStateData } from '../reducers/userplanReduxFunctions';
 
 /*******
  * Displays individual brunch boxes. Responsible for handling them
  */
 const BrunchBox = ({ brunch }) => {
 
+    const dispatch = useDispatch();
+
     //Adds food item
     const addFood = (e) => {
         e.preventDefault()
     }
 
-    //Removes the whole brunch from the Planner
+    /**
+     * Removes the whole brunch from the Planner 
+     * */
     const deleteBrunch = e => {
         e.preventDefault()
+        dispatch(deleteBrunchStateData(brunch.id))
     }
 
     return (
@@ -25,7 +32,7 @@ const BrunchBox = ({ brunch }) => {
                 <h2>{brunch.brunch}</h2>
                 <div>
                     <button onClick={addFood}>Add Food</button>
-                    <button onClick={deleteBrunch}>Delete Food</button>
+                    <button onClick={deleteBrunch}>Delete {brunch.brunch}</button>
                 </div>
             </div>
 

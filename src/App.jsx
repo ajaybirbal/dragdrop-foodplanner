@@ -14,7 +14,10 @@ function App() {
   const [foodList, setFoodList] = useState([]);
 
   useEffect(() => {
-    dispatch(setUserplanStateData(initialdata))
+    //First time loading of the items
+    if (foodList.length === 0) {
+      dispatch(setUserplanStateData(initialdata))
+    }
     setFoodList(state)
   }, [state]);
 
