@@ -1,59 +1,30 @@
-import { useState } from "react";
-import { v4 } from 'uuid'
+import { useEffect, useState } from "react";
 import styles from './App.module.css'
 import MenuDndContainer from "./components/MenuDndContainer";
-
-const initialItems = [
-  {
-    id: v4(),
-    brunch: "Breakfast",
-    items: [
-      {
-        id: v4(),
-        name: 'poha',
-        calories: 200
-      },
-      {
-        id: v4(),
-        name: 'milk',
-        calories: 140
-      },
-      {
-        id: v4(),
-        name: 'bread',
-        calories: 300
-      }
-
-    ]
-  },
-  {
-    id: v4(),
-    brunch: "Lunch",
-    items: [
-      {
-        id: v4(),
-        name: 'dal',
-        calories: 300
-      },
-      {
-        id: v4(),
-        name: 'roti',
-        calories: 200
-      }
-    ]
-  }
-]
-
+import initialdata from './initialdata'
+import { useDispatch, useSelector } from "react-redux";
+import { setUserplanStateData } from "./reducers/userplanReduxFunctions";
 
 function App() {
 
-  const [foodList, setFoodList] = useState(initialItems);
+  //react-redux functions
+  const dispatch = useDispatch();
+  const state = useSelector(state => state.userplan)
 
-  
+  const [foodList, setFoodList] = useState([]);
+
+  useEffect(() => {
+    dispatch(setUserplanStateData(initialdata))
+    setFoodList(state)
+  }, [state]);
+
 
   return (
     // Wraps whole draggable app
-    <MenuDndContainer foodList={foodList} setFoodList={setFoodList} />
+    <div className={styles.contentWrapper}>
+      <h1>Food Planner</h1>
+      <MenuDndContainer />
+    </div>
   );
 }
 

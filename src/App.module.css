@@ -1,3 +1,12 @@
 * {
     box-sizing: border-box;
 }
+
+.contentWrapper {
+    max-width: 1200px;
+    margin: 0 auto
+}
+
+.contentWrapper h1 {
+    text-align: center;
+}

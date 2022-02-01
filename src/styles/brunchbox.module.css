@@ -9,5 +9,11 @@
     font-weight: 600;
     letter-spacing: 0.4px;
     text-transform: uppercase;
+}
+
+.titleArea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid gray;
 }

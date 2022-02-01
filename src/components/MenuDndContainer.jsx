@@ -3,7 +3,13 @@ import { DragDropContext } from 'react-beautiful-dnd'
 import styles from './../styles/menuwrapper.module.css'
 import BrunchBox from './BrunchBox'
 
-const MenuDndContainer = ({ foodList, setFoodList }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setUserplanStateData } from '../reducers/userplanReduxFunctions';
+
+const MenuDndContainer = () => {
+
+    const dispatch = useDispatch();
+    const state = useSelector(state => state.userplan)
 
     /*************
      * Handles what happens when items are dragged and dropped.
@@ -11,7 +17,7 @@ const MenuDndContainer = ({ foodList, setFoodList }) => {
      * @param result - Given by the drag and drop library
      */
     const onDragHandler = result => {
-        const foodListCopy = [...foodList];
+        const foodListCopy = [...state];
 
         //If not dropped in droppable area
         if (!result.destination) return;
@@ -24,17 +30,18 @@ const MenuDndContainer = ({ foodList, setFoodList }) => {
         const addIndex = foodListCopy.findIndex(item => item.id === result.destination.droppableId)
         foodListCopy[addIndex].items.splice(result.destination.index, 0, removedItem)
 
-        setFoodList(foodListCopy);
+        //Finally make changes to the state
+        dispatch(setUserplanStateData(foodListCopy))
     }
 
     return (
         <div className={styles.wrapper}>
             <DragDropContext onDragEnd={onDragHandler}>
 
-                {foodList.map(brunch => {
+                {state.map(brunch => {
                     return (
                         // Creates a bunch box
-                        <BrunchBox brunch={brunch} />
+                        <BrunchBox brunch={brunch} key={brunch.id} />
                     )
                 })}
 
