@@ -1,0 +1,13 @@
+.brunchOutline {
+    background-color: lightgreen;
+    border: 2px solid black;
+    margin: 30px 20px;
+    padding: 20px;
+}
+
+.brunchOutline h2 {
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    border-bottom: 1px solid gray;
+}
