@@ -15,6 +15,8 @@ const BrunchBox = ({ brunch }) => {
 
     const dispatch = useDispatch();
     const [displayOverlay, setDisplayOverlay] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    
     //Stores input from the form
     const nameInput = useRef(null)
     const calorieInput = useRef(null)
@@ -34,6 +36,22 @@ const BrunchBox = ({ brunch }) => {
      */
     const addNewFoodItem = e => {
         e.preventDefault()
+
+        //Clear all previous error messages
+        setErrorMessage('')
+
+        //If input is empty
+        if (!nameInput.current.value || !calorieInput.current.value) {
+            setErrorMessage('Input can not be empty')
+            return
+        }
+
+        //If calorie input is not number
+        if (!Number.isInteger(Number(calorieInput.current.value))) {
+            setErrorMessage('Please insert numbers in calorie area')
+            return
+        }
+
         dispatch(addNewItemToBrunch(
             nameInput.current.value,
             calorieInput.current.value,
@@ -56,7 +74,10 @@ const BrunchBox = ({ brunch }) => {
             {displayOverlay ? (
                 <div>
                     <BlackOverlay setOverlay={setDisplayOverlay} />
-                    <Modal title="Add New Food" closeModal={e => setDisplayOverlay(false)}>
+                    <Modal 
+                        title="Add New Food" 
+                        closeModal={e => setDisplayOverlay(false)}
+                        errorMessage={errorMessage}>
                         <span className={`${globals.textFormModalWidth} ${globals.formLabel} `}>Food Name:</span> <br />
                         <input ref={nameInput} className={globals.textForm} placeholder='Enter food item' />
                         <br />

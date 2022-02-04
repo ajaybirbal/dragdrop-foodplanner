@@ -9,11 +9,12 @@ import BlackOverlay from './BlackOverlay';
 import Modal from './Modal';
 import globals from './../styles/global.module.css'
 
-const AddBrunchButton = ({className}) => {
+const AddBrunchButton = ({ className }) => {
 
     const dispatch = useDispatch();
     const [displayOverlay, setDisplayOverlay] = useState(false);
-    
+    const [errorMessage, setErrorMessage] = useState('');
+
     //Ref for storing name input
     const nameInput = useRef(null);
 
@@ -29,6 +30,16 @@ const AddBrunchButton = ({className}) => {
      * Responsible for dispatching the new brunch to the state
      */
     const addNewBrunch = e => {
+        e.preventDefault();
+        //Clear previous error messages
+        setErrorMessage('')
+
+        //If input is empty
+        if (!nameInput.current.value) {
+            setErrorMessage('Input can not be empty')
+            return
+        }
+
         dispatch(addNewBrunchToState(nameInput.current.value))
         setDisplayOverlay(false);
     }
@@ -38,10 +49,13 @@ const AddBrunchButton = ({className}) => {
             {displayOverlay ? (
                 <>
                     <BlackOverlay setOverlay={setDisplayOverlay} />
-                    
+
                     {/* Create a add new brunch form here */}
-                    <Modal title="Add new brunch:" closeModal={e => setDisplayOverlay(false)}>
-                        <span className={`${globals.textFormModalWidth} ${globals.formLabel} `}>Brunch Name:</span> <br /> 
+                    <Modal
+                        title="Add new brunch:"
+                        closeModal={e => setDisplayOverlay(false)}
+                        errorMessage={errorMessage}>
+                        <span className={`${globals.textFormModalWidth} ${globals.formLabel} `}>Brunch Name:</span> <br />
                         <input ref={nameInput} className={globals.textForm} placeholder='Enter brunch name' />
                         <p>
                             <button className={globals.primaryButton} onClick={addNewBrunch}>Add Brunch</button>

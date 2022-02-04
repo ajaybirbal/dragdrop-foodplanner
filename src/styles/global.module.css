@@ -1,5 +1,9 @@
 /* Styles which are global to all. Eg:- Brand styles*/
 
+body {
+    background-color: rgb(177, 228, 177);
+}
+
 .primaryButton {
     background-color: rgb(247, 188, 93);
     padding: 10px 18px;
