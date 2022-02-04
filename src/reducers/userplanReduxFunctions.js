@@ -12,7 +12,6 @@ export const setUserplanStateData = data => {
     }
 }
 
-
 /**
  * Deletes the whole brunch
  * 
@@ -72,5 +71,23 @@ export const deleteFoodItem = (brunchID, foodID) => {
         type: 'DELETE_FOOD_ITEM',
         brunchID,
         foodID
+    }
+}
+
+/**
+ * Edits the food Item
+ * @param {*} newName New name for the item
+ * @param {*} newCalories New calories amount for the food
+ * @param {*} foodID FoodID of the item to be edited
+ * @param {*} brunchId Brunch Id in which food item resides
+ * @returns 
+ */
+export const editFoodItem = (newName, newCalories, foodID, brunchId) => {
+    return {
+        type: 'EDIT_FOOD_ITEM',
+        newName,
+        newCalories,
+        foodID,
+        brunchId
     }
 }

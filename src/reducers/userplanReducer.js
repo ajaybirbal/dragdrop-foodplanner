@@ -35,6 +35,21 @@ export default function userplanReducer(state = [], action){
 
             return stateTemp.map(brunch => brunch.id !== action.brunchID ? brunch : brunchFromItemtobeDeleted)
 
+        case 'EDIT_FOOD_ITEM':
+            
+            const copyState = [...state]
+            const [brunchToBeEdited] = copyState.filter( brunch => brunch.id === action.brunchId )
+            const [itemToBeEdited] = brunchToBeEdited.items.filter(item => item.id === action.foodID)
+
+            //Item edited
+            itemToBeEdited.name = action.newName;
+            itemToBeEdited.calories = action.newCalories
+            
+            const newItems = brunchToBeEdited.items.map(item => item.id === action.foodID ? itemToBeEdited : item)
+            brunchToBeEdited.items = newItems
+
+            return copyState.map(brunch => brunch.id !== action.brunchId? brunch : brunchToBeEdited )
+
         default:
             return state
     }

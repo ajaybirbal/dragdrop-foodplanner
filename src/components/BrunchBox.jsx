@@ -62,7 +62,7 @@ const BrunchBox = ({ brunch }) => {
 
     /**
      * Removes the whole brunch from the Planner 
-     * */
+     **/
     const deleteBrunch = e => {
         e.preventDefault()
         dispatch(deleteBrunchStateData(brunch.id))

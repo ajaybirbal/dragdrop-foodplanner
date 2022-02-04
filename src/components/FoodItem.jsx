@@ -1,16 +1,62 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './../styles/fooditem.module.css'
 import { Draggable } from 'react-beautiful-dnd'
 import globals from './../styles/global.module.css'
 import { useDispatch } from 'react-redux';
-import { deleteFoodItem } from '../reducers/userplanReduxFunctions';
+import { deleteFoodItem, editFoodItem } from '../reducers/userplanReduxFunctions';
+import BlackOverlay from './BlackOverlay';
+import Modal from './Modal';
 
 const FoodItem = ({ item, index, brunchID }) => {
 
     const dispatch = useDispatch();
+    const [displayOverlay, setDisplayOverlay] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const editItem = e => {
-        e.preventDefaukt();
+    //Stores input from the form
+    const nameInput = useRef(null)
+    const calorieInput = useRef(null)
+
+    /**
+     * Displays the edit box
+     * @param {*} e 
+     */
+    const displayEditItemBox = e => {
+        e.preventDefault();
+        setErrorMessage('')
+        setDisplayOverlay(true)
+    }
+
+    /**
+     * Edits the brunch box.
+     */
+    const submitEditBox = e => {
+        setErrorMessage('')
+        e.preventDefault();
+
+        if (!nameInput.current.value || !calorieInput.current.value) {
+            setErrorMessage('Input can not be empty')
+            return
+        }
+
+        if (!Number(calorieInput.current.value)) {
+            setErrorMessage('Calories must be a number')
+            return
+        }
+
+        //If changes has been made 
+        if ((nameInput.current.value !== item.name) || Number(calorieInput.current.value) !== item.calories) {
+            setErrorMessage('')
+            dispatch(editFoodItem(
+                nameInput.current.value,
+                calorieInput.current.value,
+                item.id,
+                brunchID
+            ))
+        } else
+            setErrorMessage("No changes made!")
+
+        setDisplayOverlay(false)
     }
 
     //Responsible for deleting the food item
@@ -20,29 +66,52 @@ const FoodItem = ({ item, index, brunchID }) => {
     }
 
     return (
-        <Draggable key={item.id} draggableId={item.id} index={index}>
-            {provided => (
-                <div
-                    className={styles.itemContainer}
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps} >
-                    <div>
-                        {/* ------ Add row stuffs here ------- */}
-                        <span>
-                            {item.name}
-                        </span>
-                        <span>
-                            {item.calories} Calories
-                        </span>
+        <>
+            {displayOverlay ? (
+                <>
+                    <BlackOverlay setOverlay={setDisplayOverlay} />
+                    <Modal
+                        title="Edit Food"
+                        closeModal={e => setDisplayOverlay(false)}
+                        errorMessage={errorMessage}>
+                        <span className={`${globals.textFormModalWidth} ${globals.formLabel} `}>Food Name:</span> <br />
+                        <input ref={nameInput} className={globals.textForm} defaultValue={item.name} />
+                        <br />
+                        <span className={`${globals.textFormModalWidth} ${globals.formLabel} `}>Calories:</span> <br />
+                        <input ref={calorieInput} className={globals.textForm} defaultValue={item.calories} />
+
+                        <p>
+                            <button className={globals.primaryButton} onClick={submitEditBox}>Edit Brunch</button>
+                            <button className={globals.tertiaryButton} onClick={e => setDisplayOverlay(false)}>Cancel</button>
+                        </p>
+                    </Modal>
+                </>
+            ) : ''}
+
+            <Draggable key={item.id} draggableId={item.id} index={index}>
+                {provided => (
+                    <div
+                        className={styles.itemContainer}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps} >
                         <div>
-                            <button onClick={editItem} className={globals.secondaryButton}>Edit</button>
-                            <button onClick={deleteItem} className={globals.tertiaryButton}>Delete</button>
+                            {/* ------ Add row stuffs here ------- */}
+                            <span>
+                                {item.name}
+                            </span>
+                            <span>
+                                {item.calories} Calories
+                            </span>
+                            <div>
+                                <button onClick={displayEditItemBox} className={globals.secondaryButton}>Edit</button>
+                                <button onClick={deleteItem} className={globals.tertiaryButton}>Delete</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </Draggable>
+                )}
+            </Draggable>
+        </>
     );
 };
 

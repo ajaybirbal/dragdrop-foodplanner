@@ -38,6 +38,26 @@ const initialdata = [{
         calories: 200
     }
     ]
+},
+{
+    id: v4(),
+    brunch: "Dinner",
+    items: [{
+        id: v4(),
+        name: 'paneer',
+        calories: 500
+    },
+    {
+        id: v4(),
+        name: 'roti',
+        calories: 300
+    },
+    {
+        id: v4(),
+        name: 'cucumbers',
+        calories: 100
+    },
+    ]
 }
 ]
 
