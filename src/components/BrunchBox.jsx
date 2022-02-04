@@ -90,7 +90,7 @@ const BrunchBox = ({ brunch }) => {
                             ref={provided.innerRef}>
                             {brunch.items.map((item, index) => {
                                 return (
-                                    <FoodItem item={item} index={index} key={item.id} />
+                                    <FoodItem item={item} index={index} key={item.id} brunchID={brunch.id}/>
                                 )
                             })}
                             {provided.placeholder}

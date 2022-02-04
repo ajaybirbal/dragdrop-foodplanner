@@ -2,15 +2,21 @@ import React from 'react';
 import styles from './../styles/fooditem.module.css'
 import { Draggable } from 'react-beautiful-dnd'
 import globals from './../styles/global.module.css'
+import { useDispatch } from 'react-redux';
+import { deleteFoodItem } from '../reducers/userplanReduxFunctions';
 
-const FoodItem = ({ item, index }) => {
+const FoodItem = ({ item, index, brunchID }) => {
+
+    const dispatch = useDispatch();
 
     const editItem = e => {
         e.preventDefaukt();
     }
 
+    //Responsible for deleting the food item
     const deleteItem = e => {
-        e.preventDefaukt();
+        e.preventDefault();
+        dispatch(deleteFoodItem(brunchID, item.id))
     }
 
     return (

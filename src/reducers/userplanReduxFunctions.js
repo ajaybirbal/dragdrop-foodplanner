@@ -60,3 +60,17 @@ export const addNewItemToBrunch = (name, calories, id) => {
         }
     }
 }
+
+/**
+ * Responsible for deleting food from the particular brunch.
+ * @param {*} brunchID Id of the brunch
+ * @param {*} foodID Id of the food
+ * @returns payload 
+ */
+export const deleteFoodItem = (brunchID, foodID) => {
+    return {
+        type: 'DELETE_FOOD_ITEM',
+        brunchID,
+        foodID
+    }
+}

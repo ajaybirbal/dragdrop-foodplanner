@@ -23,7 +23,17 @@ export default function userplanReducer(state = [], action){
             brunchToBeAdded.items.push(action.payload.foodData);
             
             return tempState.map(brunch => brunch.id !== action.payload.brunchID ? brunch : brunchToBeAdded)
-         
+
+        //Deletes the current food item
+        case 'DELETE_FOOD_ITEM':
+
+            const stateTemp = [...state]
+            const [brunchFromItemtobeDeleted] = stateTemp.filter( brunch => brunch.id === action.brunchID )
+
+            const itemIndex = brunchFromItemtobeDeleted.items.findIndex(food => food.id === action.foodID)
+            brunchFromItemtobeDeleted.items.splice(itemIndex, 1)
+
+            return stateTemp.map(brunch => brunch.id !== action.brunchID ? brunch : brunchFromItemtobeDeleted)
 
         default:
             return state
