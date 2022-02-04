@@ -10,3 +10,8 @@
 .contentWrapper h1 {
     text-align: center;
 }
+
+h1 {
+    font-family: 'Lora', serif;
+    text-transform: uppercase;
+}
