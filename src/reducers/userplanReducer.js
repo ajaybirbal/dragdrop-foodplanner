@@ -1,4 +1,3 @@
-import initialData from './../initialdata'
 
 export default function userplanReducer(state = [], action){
 
@@ -16,9 +15,14 @@ export default function userplanReducer(state = [], action){
         case 'ADD_NEW_BRUNCH':
             return [...state, action.payload]       
         
-        //Adds new item to the brunch
+        //Adds new item to the particular brunch
         case 'ADD_NEW_ITEM':
-            return state
+            const tempState = [...state]
+            const [brunchToBeAdded] = tempState.filter( brunch => brunch.id === action.payload.brunchID )
+            
+            brunchToBeAdded.items.push(action.payload.foodData);
+            
+            return tempState.map(brunch => brunch.id !== action.payload.brunchID ? brunch : brunchToBeAdded)
          
 
         default:

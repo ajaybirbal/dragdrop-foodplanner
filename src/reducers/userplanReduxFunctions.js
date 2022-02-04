@@ -40,3 +40,23 @@ export const addNewBrunchToState = name => {
         }
     }
 }
+
+/**
+ * Adds a food item to the brunch
+ * @param {*} name Name of the food item
+ * @param {*} calories calories in the food item
+ * @param {*} id ID of the brunch
+ */
+export const addNewItemToBrunch = (name, calories, id) => {
+    return{
+        type: 'ADD_NEW_ITEM',
+        payload: {
+            brunchID: id,
+            foodData: {
+                id: v4(),
+                name,
+                calories
+            }
+        }
+    }
+}
