@@ -68,6 +68,17 @@ const BrunchBox = ({ brunch }) => {
         dispatch(deleteBrunchStateData(brunch.id))
     }
 
+    /**
+     * Calculates the total calories in the brunch
+     * @param {} brunch 
+     * @returns 
+     */
+    const calculateTotalCalories = brunch => {
+        return brunch.items.reduce((sum, currentItem) => {
+            return sum + Number(currentItem.calories)
+        }, 0)
+    }
+
     return (
         <>
             {/* Add new food form */}
@@ -117,7 +128,9 @@ const BrunchBox = ({ brunch }) => {
                             {provided.placeholder}
                         </div>
                     )}
+                    
                 </Droppable>
+                <h3 className={styles.totalCalories}>Total Calories: {calculateTotalCalories(brunch)}</h3>
             </div>
         </>
     )
