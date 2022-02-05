@@ -91,3 +91,16 @@ export const editFoodItem = (newName, newCalories, foodID, brunchId) => {
         brunchId
     }
 }
+
+/**
+ * Edits the title of the brunch.
+ * @param {*} newTitle New title of the bruch.
+ * @param {*} brunchID ID of the brunch to be edited
+ */
+export const editBrunchTitle = (newTitle, brunchID) => {
+    return {
+        type: 'EDIT_BRUNCH_TITLE',
+        title: newTitle,
+        brunchID
+    }
+}

@@ -83,7 +83,7 @@ const FoodItem = ({ item, index, brunchID }) => {
                             <input ref={calorieInput} className={globals.textForm} defaultValue={item.calories} />
 
                             <p>
-                                <button type='submit' className={globals.primaryButton} onClick={submitEditBox}>Edit Brunch</button>
+                                <button type='submit' className={globals.primaryButton} onClick={submitEditBox}>Save Changes</button>
                                 <button className={globals.tertiaryButton} onClick={e => setDisplayOverlay(false)}>Cancel</button>
                             </p>
                         </form>

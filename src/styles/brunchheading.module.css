@@ -1,0 +1,19 @@
+.brunchInput {
+    font-size: 20px;
+    padding: 7px;
+    padding-left: 0;
+    padding-bottom: 3px;
+    margin-bottom: 10px;
+    border: 0;
+    max-width: 35%;
+    background-color: lightgreen;
+    font-weight: bolder;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-family: 'urbanic';
+    text-transform: uppercase;
+}
+
+.brunchInput:focus {
+    outline: none;
+}

@@ -8,6 +8,7 @@ import globals from './../styles/global.module.css'
 import Modal from './Modal';
 import BlackOverlay from './BlackOverlay';
 import { motion } from 'framer-motion';
+import BrunchHeading from './BrunchHeading';
 
 /*******
  * Displays individual brunch boxes. Responsible for handling them
@@ -123,10 +124,10 @@ const BrunchBox = ({ brunch }) => {
                 className={styles.brunchOutline}>
 
                 <div className={styles.titleArea}>
-                    <h2>{brunch.brunch}</h2>
+                    <BrunchHeading title={brunch.brunch} id={brunch.id} />
                     <div>
                         <button onClick={displayAddFoodForm} className={globals.primaryButton}>Add Food</button>
-                        <button onClick={deleteBrunch} className={globals.secondaryButton} >Delete {brunch.brunch}</button>
+                        <button onClick={deleteBrunch} className={globals.tertiaryButton} >Delete</button>
                     </div>
                 </div>
 

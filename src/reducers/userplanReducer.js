@@ -1,4 +1,3 @@
-
 export default function userplanReducer(state = [], action){
 
     switch(action.type){
@@ -35,6 +34,7 @@ export default function userplanReducer(state = [], action){
 
             return stateTemp.map(brunch => brunch.id !== action.brunchID ? brunch : brunchFromItemtobeDeleted)
 
+        //Edits the food item
         case 'EDIT_FOOD_ITEM':
             
             const copyState = [...state]
@@ -49,6 +49,13 @@ export default function userplanReducer(state = [], action){
             brunchToBeEdited.items = newItems
 
             return copyState.map(brunch => brunch.id !== action.brunchId? brunch : brunchToBeEdited )
+
+        //Edits the brunch title
+        case 'EDIT_BRUNCH_TITLE':
+            const oldState = [...state];
+            const [titleChangeBrunch] = oldState.filter( brunch => brunch.id === action.brunchID )
+            titleChangeBrunch.brunch = action.title
+            return oldState.map(brunch => brunch.id === action.brunchID ? titleChangeBrunch : brunch)
 
         default:
             return state

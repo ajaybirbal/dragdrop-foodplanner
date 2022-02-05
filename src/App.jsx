@@ -56,7 +56,7 @@ function App() {
       <h1>Food Planner</h1>
       <div className={styles.buttonContainer}>
         <AddBrunchButton className={globals.primaryButton} />
-        <button className={globals.secondaryButton} onClick={loadSampleData}>Load Sample Data</button>
+        <button className={globals.tertiaryButton} onClick={loadSampleData}>Load Sample Data</button>
       </div>
       <MenuDndContainer />
     </div>
