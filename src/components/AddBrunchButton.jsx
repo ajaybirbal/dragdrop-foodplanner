@@ -55,12 +55,14 @@ const AddBrunchButton = ({ className }) => {
                         title="Add new brunch:"
                         closeModal={e => setDisplayOverlay(false)}
                         errorMessage={errorMessage}>
-                        <span className={`${globals.textFormModalWidth} ${globals.formLabel} `}>Brunch Name:</span> <br />
-                        <input ref={nameInput} className={globals.textForm} placeholder='Enter brunch name' />
-                        <p>
-                            <button className={globals.primaryButton} onClick={addNewBrunch}>Add Brunch</button>
-                            <button className={globals.tertiaryButton} onClick={e => setDisplayOverlay(false)}>Cancel</button>
-                        </p>
+                        <form>
+                            <span className={`${globals.textFormModalWidth} ${globals.formLabel} `}>Brunch Name:</span> <br />
+                            <input ref={nameInput} className={globals.textForm} placeholder='Enter brunch name' />
+                            <p>
+                                <button type='submit' className={globals.primaryButton} onClick={addNewBrunch}>Add Brunch</button>
+                                <button className={globals.tertiaryButton} onClick={e => setDisplayOverlay(false)}>Cancel</button>
+                            </p>
+                        </form>
                     </Modal>
 
                 </>

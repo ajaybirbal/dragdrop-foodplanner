@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { deleteFoodItem, editFoodItem } from '../reducers/userplanReduxFunctions';
 import BlackOverlay from './BlackOverlay';
 import Modal from './Modal';
+import { motion } from 'framer-motion';
 
 const FoodItem = ({ item, index, brunchID }) => {
 
@@ -74,41 +75,47 @@ const FoodItem = ({ item, index, brunchID }) => {
                         title="Edit Food"
                         closeModal={e => setDisplayOverlay(false)}
                         errorMessage={errorMessage}>
-                        <span className={`${globals.textFormModalWidth} ${globals.formLabel} `}>Food Name:</span> <br />
-                        <input ref={nameInput} className={globals.textForm} defaultValue={item.name} />
-                        <br />
-                        <span className={`${globals.textFormModalWidth} ${globals.formLabel} `}>Calories:</span> <br />
-                        <input ref={calorieInput} className={globals.textForm} defaultValue={item.calories} />
+                        <form>
+                            <span className={`${globals.textFormModalWidth} ${globals.formLabel} `}>Food Name:</span> <br />
+                            <input ref={nameInput} className={globals.textForm} defaultValue={item.name} />
+                            <br />
+                            <span className={`${globals.textFormModalWidth} ${globals.formLabel} `}>Calories:</span> <br />
+                            <input ref={calorieInput} className={globals.textForm} defaultValue={item.calories} />
 
-                        <p>
-                            <button className={globals.primaryButton} onClick={submitEditBox}>Edit Brunch</button>
-                            <button className={globals.tertiaryButton} onClick={e => setDisplayOverlay(false)}>Cancel</button>
-                        </p>
+                            <p>
+                                <button type='submit' className={globals.primaryButton} onClick={submitEditBox}>Edit Brunch</button>
+                                <button className={globals.tertiaryButton} onClick={e => setDisplayOverlay(false)}>Cancel</button>
+                            </p>
+                        </form>
                     </Modal>
                 </>
             ) : ''}
 
             <Draggable key={item.id} draggableId={item.id} index={index}>
                 {provided => (
-                    <div
-                        className={styles.itemContainer}
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps} >
-                        <div>
-                            {/* ------ Add row stuffs here ------- */}
-                            <span>
-                                {item.name}
-                            </span>
-                            <span>
-                                {item.calories} Calories
-                            </span>
+                    <motion.div initial={{ scale: 1.6 }} animate={{ scale: 1 }}>
+                        <div
+                            className={styles.itemContainer}
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}>
                             <div>
-                                <button onClick={displayEditItemBox} className={globals.secondaryButton}>Edit</button>
-                                <button onClick={deleteItem} className={globals.tertiaryButton}>Delete</button>
+
+                                {/* ------ Add row stuffs here ------- */}
+                                <span>
+                                    {item.name}
+                                </span>
+                                <span>
+                                    {item.calories} Calories
+                                </span>
+                                <div>
+                                    <button onClick={displayEditItemBox} className={globals.secondaryButton}>Edit</button>
+                                    <button onClick={deleteItem} className={globals.tertiaryButton}>Delete</button>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 )}
             </Draggable>
         </>

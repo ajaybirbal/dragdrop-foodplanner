@@ -1,6 +1,6 @@
 # Drag and Drop Food Planner
 
-This is a portfolio project created by Ajay Birbal. It has drag and drop functionality to plan food for the day. 
+This is a portfolio project created by Ajay Birbal. It has drag and drop functionality to plan food for the day. Framer-motion library was also used for some animations on the app.
 
 Demo: - https://dragdrop-foodplanner.vercel.app/
 

@@ -6,14 +6,19 @@ import React from 'react'
 import styles from './../styles/modal.module.css'
 import ReactDOM from "react-dom";
 
+import { motion } from 'framer-motion';
+
 const Modal = ({title, closeModal, errorMessage, children}) => {
   return ReactDOM.createPortal(
-    <div className={styles.container}>
+    <motion.div
+      initial={{y: '-100vh'}}
+      animate={{y: 0}} 
+      className={styles.container}>
       <h3>{title}</h3>
       <button className={styles.closeButton} onClick={closeModal}>X</button>
-      <div className={styles.errorMessage}>{errorMessage ? errorMessage : ''}</div>
+      <div className={styles.errorMessage}>{errorMessage? errorMessage : ''}</div>
       {children}
-    </div>, document.body)
+    </motion.div>, document.body)
 }
 
 export default Modal
