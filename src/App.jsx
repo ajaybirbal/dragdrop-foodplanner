@@ -7,7 +7,6 @@ import { setUserplanStateData } from "./reducers/userplanReduxFunctions";
 import AddBrunchButton from "./components/AddBrunchButton";
 import globals from "./styles/global.module.css"
 import { loadState, saveState } from "./helper/localstorage";
-import store from './store'
 
 function App() {
 
@@ -42,13 +41,22 @@ function App() {
 
   }, [state, foodList]);
 
+  /**
+   * Loads sample data to the app
+   * @param {*} e 
+   */
+  const loadSampleData = e => {
+    e.preventDefault();
+    dispatch(setUserplanStateData(initialdata))
+  }
 
   return (
     // Wraps whole draggable app
     <div className={styles.contentWrapper}>
       <h1>Food Planner</h1>
-      <div>
+      <div className={styles.buttonContainer}>
         <AddBrunchButton className={globals.primaryButton} />
+        <button className={globals.secondaryButton} onClick={loadSampleData}>Load Sample Data</button>
       </div>
       <MenuDndContainer />
     </div>

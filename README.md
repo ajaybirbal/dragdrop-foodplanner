@@ -2,6 +2,8 @@
 
 This is a portfolio project created by Ajay Birbal. It has drag and drop functionality to plan food for the day. Framer-motion library was also used for some animations on the app.
 
+This app uses local storage to store the current state of the app.
+
 Demo: - https://dragdrop-foodplanner.vercel.app/
 
 ## Libraries Used

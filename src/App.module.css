@@ -15,3 +15,8 @@ h1 {
     font-family: 'Lora', serif;
     text-transform: uppercase;
 }
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-around;
+}
